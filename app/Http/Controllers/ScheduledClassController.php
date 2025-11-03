@@ -14,7 +14,7 @@ class ScheduledClassController extends Controller
      */
     public function index()
     {
-        $scheduledClasses = ScheduledClass::whereBelongsTo(Auth::user(), 'instructor')->where('date_time', '>', now())->oldest('date_time')->get();
+        $scheduledClasses = ScheduledClass::whereBelongsTo(Auth::user(), 'instructor')->upcoming()->oldest('date_time')->get();
 
         return view('instructor.upcoming', compact('scheduledClasses'));
     }
@@ -57,7 +57,11 @@ class ScheduledClassController extends Controller
      */
     public function destroy(ScheduledClass $schedule)
     {
-        if ($schedule->instructor->isNot(Auth::user())) {
+//        if ($schedule->instructor->isNot(Auth::user())) {
+//            abort(403);
+//        }
+
+        if (Auth::user()->cannot('delete', $schedule)) {
             abort(403);
         }
 
