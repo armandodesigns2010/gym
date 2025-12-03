@@ -1,1 +1,2 @@
-*.sqlite*
+*.sqlite
+!database/database.sqlite
