@@ -1,32 +1,42 @@
-name: Laravel CI
+name: Minimal Test
 
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+on: [push]
 
 jobs:
-  laravel-tests:
+  test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - run: echo "Hello from GitHub Actions!"
 
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: 8.3
-          extensions: mbstring, bcmath
-          coverage: none
+# name: Laravel CI
 
-      - name: Install Composer dependencies
-        run: composer install --prefer-dist --no-progress --no-suggest
+# on:
+#   push:
+#     branches: [ main ]
+#   pull_request:
+#     branches: [ main ]
 
-      - name: Copy .env
-        run: cp .env.example .env
+# jobs:
+#   laravel-tests:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v4
 
-      - name: Generate app key
-        run: php artisan key:generate
+#       - name: Setup PHP
+#         uses: shivammathur/setup-php@v2
+#         with:
+#           php-version: 8.3
+#           extensions: mbstring, bcmath
+#           coverage: none
+
+#       - name: Install Composer dependencies
+#         run: composer install --prefer-dist --no-progress --no-suggest
+
+#       - name: Copy .env
+#         run: cp .env.example .env
+
+#       - name: Generate app key
+#         run: php artisan key:generate
 
       # No need to create or migrate the database!
 
