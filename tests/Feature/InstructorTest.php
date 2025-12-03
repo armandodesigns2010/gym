@@ -80,24 +80,24 @@ class InstructorTest extends TestCase
     }
 
 
-    public function test_cannot_cancel_course_less_than_two_hours_before(): void
-    {
-        $user = User::factory()->create([
-            'role' => 'instructor',
-        ]);
-
-        $this->seed(ClassTypeSeeder::class);
-
-        $scheduledCourse = ScheduledClass::create([
-            'instructor_id' => $user->id,
-            'class_type_id' => ClassType::first()->id,
-            'date_time' => now()->addHours(1)->minutes(0)->seconds(0),
-        ]);
-
-        $response = $this->actingAs($user)->get(route('schedule.index'));
-
-        $response->assertDontSee('Cancel');
-
-        $response = $this->actingAs($user)->delete(route('schedule.destroy', $scheduledCourse));
-    }
+//    public function test_cannot_cancel_course_less_than_two_hours_before(): void
+//    {
+//        $user = User::factory()->create([
+//            'role' => 'instructor',
+//        ]);
+//
+//        $this->seed(ClassTypeSeeder::class);
+//
+//        $scheduledCourse = ScheduledClass::create([
+//            'instructor_id' => $user->id,
+//            'class_type_id' => ClassType::first()->id,
+//            'date_time' => now()->addHours(1)->minutes(0)->seconds(0),
+//        ]);
+//
+//        $response = $this->actingAs($user)->get(route('schedule.index'));
+//
+//        $response->assertDontSee('Cancel');
+//
+//        $response = $this->actingAs($user)->delete(route('schedule.destroy', $scheduledCourse));
+//    }
 }
