@@ -30,8 +30,8 @@ jobs:
 
       # No need to create or migrate the database!
 
-      # - name: Run tests
-      #   env:
-      #     DB_CONNECTION: sqlite
-      #     DB_DATABASE: database/database.sqlite
-      #   run: vendor/bin/phpunit
+      - name: Run tests
+        env:
+          DB_CONNECTION: sqlite
+          DB_DATABASE: database/database.sqlite
+        run: php vendor/bin/phpunit --colors=never tests/Feature/InstructorTest.php
